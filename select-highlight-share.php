@@ -32,26 +32,26 @@ function sth_execute_script() {
 }
 
 //Set default colors
-/* function sth_set_default_colors() {
-    $colors = array(
-        'background' => '#99ffbe',
-        'text' => '#000'
-    );
-    if( get_option( 'highlight_plugin_colors' ) == false ) {
-        //update_option( 'highlight_plugin_colors', $colors );
+ function sth_set_default_colors() {
+    if( get_option( 'bg_color_choice' ) == false ) {
+        update_option( 'bg_color_choice', '#99ffbe' );
     }
-}*/
+    if( get_option( 'text_color_choice' ) == false ) {
+        update_option( 'text_color_choice', '#000' );
+    }
+}
 
 // Get the user-defined color options from the DB and add them to the CSS stylesheet
 function sth_set_colors() {
-    $colors = get_option ( 'highlight_plugin_colors' );
+    $background_color = get_option( 'bg_color_choice' );
+    $text_color = get_option( 'text_color_choice' );
     $inline_style = "#main ::-moz-selection {
-        background-color: " . $colors['background'] . ";" . "
-        color: " . $colors['text'] . ";" . "
+        background-color: " . $background_color . ";" . "
+        color: " . $text_color . ";" . "
     }
     #main ::selection {
-        background-color: " . $colors['background'] . ";" . "
-        color: " . $colors['text'] . ";" . "
+        background-color: " . $background_color . ";" . "
+        color: " . $text_color . ";" . "
     }";
     wp_add_inline_style( 'highlight-style', $inline_style );
 }
